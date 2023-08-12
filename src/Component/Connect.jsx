@@ -1,6 +1,6 @@
 "use client";
 
-import btn from "@/component/connect.module.css";
+import btn from "@/Component/connect.module.css";
 import { useWeb3 } from "@/context/context";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";

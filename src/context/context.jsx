@@ -3,7 +3,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { ethers } from "ethers";
 
-import ContractABI from "@/payMe.sol/payMe.json";
+import ContractABI from "../payMe.sol/PayMe.json";
 
 // Define the context
 const StateProvider = createContext();

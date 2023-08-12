@@ -1,16 +1,16 @@
 "use client";
-import bs from "@/component/balance.module.css";
+import bs from "../Component/balance.module.css";
 import Image from "next/image";
 import { UserOutlined, DollarOutlined } from "@ant-design/icons";
 import { ethers } from "ethers";
-import logo from "@/Component/ethereum-1.svg";
-import profile from "@/Component/profile.svg";
+import logo from "../Component/ethereum-1.svg";
+import profile from "../Component/profile.svg";
 import { useState, useEffect } from "react";
 import { BiTransferAlt } from "react-icons/bi";
-import RequestCard from "@/card/RequestCard";
-import ListCard from "@/card/ListCard";
-import PayCard from "@/card/PayCard";
-import { useWeb3 } from "@/context/context";
+import RequestCard from "../card/RequestCard";
+import ListCard from "../card/ListCard";
+import PayCard from "../card/PayCard";
+import { useWeb3 } from "../context/context";
 
 function Balance() {
   const { contract, AllRequests, acctinfo, myName, setrecent, recent } =

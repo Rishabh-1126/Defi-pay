@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import history from "@/component/recent.module.css";
+import history from "@/Component/recent.module.css";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 import { useWeb3 } from "@/context/context";
 
@@ -10,16 +10,17 @@ function RecentHistory() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    const check = async () => {
+      if (contract && account) {
+        const data = await Activity();
+        console.log("data in check ", data);
+        const reversedData = [...data].reverse(); // Create a reversed copy of the data array
+        setList(reversedData);
+      }
+    };
     check();
   }, [recent, account]);
 
-  const check = async () => {
-    if (contract && account) {
-      const data = await Activity();
-      console.log("data in check ", data);
-      setList(data);
-    }
-  };
   const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -37,28 +38,25 @@ function RecentHistory() {
         <p className={`${history.clr1}`}>amount</p>
       </div>
       {list.length > 0 ? (
-        [...list]
-          .slice(startIndex, endIndex)
-          .reverse()
-          .map((item, i) => {
-            return (
-              <div className={history.section} key={i}>
-                <p className={`${history.clr1}`}>
-                  {item.name ? item.name : "N/A"}
-                </p>
-                <p>{item.action}</p>
-                <p className={`${history.clr1}`}>
-                  {item.otherPartyAddress.slice(0, 6) +
-                    "...." +
-                    item.otherPartyAddress.slice(-4)}
-                </p>
-                <p>{item.message}</p>
-                <p className={`${history.clr1}`}>
-                  {parseFloat(item.amount) / 1e18}
-                </p>
-              </div>
-            );
-          })
+        list.slice(startIndex, endIndex).map((item, i) => {
+          return (
+            <div className={history.section} key={i}>
+              <p className={`${history.clr1}`}>
+                {item.name ? item.name : "N/A"}
+              </p>
+              <p>{item.action}</p>
+              <p className={`${history.clr1}`}>
+                {item.otherPartyAddress.slice(0, 6) +
+                  "...." +
+                  item.otherPartyAddress.slice(-4)}
+              </p>
+              <p>{item.message}</p>
+              <p className={`${history.clr1}`}>
+                {parseFloat(item.amount) / 1e18}
+              </p>
+            </div>
+          );
+        })
       ) : (
         <div className={history.empty}>
           YOU DO NOT HAVE ANY RECENT ACTIVITIES{" "}
